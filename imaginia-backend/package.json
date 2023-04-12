@@ -1,0 +1,55 @@
+{
+  "name": "imaginia-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/src/server.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "NODE_ENV=production node dist/src/server.js",
+    "load-envs": "dotenv -e .env.production",
+    "migration:generate": "npm run load-envs prisma migrate dev",
+    "migration:run": "npm run load-envs prisma migrate deploy",
+    "seed": "npm run load-envs prisma db seed",
+    "test:unit": "NODE_ENV=tests jest --passWithNoTests --runInBand tests/unit",
+    "dev:load-envs": "dotenv -e .env.development",
+    "dev:migration:generate": "npm run dev:load-envs prisma migrate dev",
+    "dev:migration:run": "npm run dev:load-envs prisma migrate deploy",
+    "dev:seed": "npm run dev:load-envs prisma db seed",
+    "dev": "NODE_ENV=development nodemon --watch 'src/' --exec 'ts-node -r tsconfig-paths/register ./src/server.ts' -e ts"
+  },
+  "prisma": {
+    "seed": "npm run dev:load-envs -- ts-node prisma/seed.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/cors": "^2.8.13",
+    "@types/express": "^4.17.17",
+    "@types/jest": "^29.5.0",
+    "@types/jsonwebtoken": "^9.0.1",
+    "@types/node": "^18.15.5",
+    "dotenv-cli": "^7.1.0",
+    "jest": "^29.5.0",
+    "nodemon": "^2.0.21",
+    "prisma": "^4.11.0",
+    "ts-jest": "^29.0.5",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.1.2",
+    "typescript": "^5.0.2",
+    "typescript-transform-paths": "^3.4.6"
+  },
+  "dependencies": {
+    "@brazilian-utils/brazilian-utils": "^1.0.0-rc.12",
+    "@prisma/client": "^4.11.0",
+    "bcrypt": "^5.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "dotenv-expand": "^10.0.0",
+    "express": "^4.18.2",
+    "http-status": "^1.6.2",
+    "joi": "^17.9.1",
+    "jsonwebtoken": "^9.0.0"
+  }
+}

@@ -1,0 +1,50 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model User {
+  id         Int          @id @default(autoincrement())
+  email      String       @unique @db.VarChar(255)
+  password   String       @db.VarChar(255)
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+  Session    Session[]
+}
+
+model Session {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  User      User     @relation(fields: [userId], references: [id])
+  token     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Book {
+  id         Int        @id @default(autoincrement())
+  title      String     @db.VarChar(255)
+  author     String     @db.VarChar(255)
+  professor  String     @db.VarChar(255)
+  magicCode  String     @unique
+  createdAt  DateTime   @default(now())
+  pages      Page[]
+}
+
+model Page {
+  id         Int      @id @default(autoincrement())
+  pageNumber Int
+  pageType   PageType
+  content    String   @db.VarChar(1000)
+  Book       Book     @relation(fields: [bookId], references: [id])
+  bookId     Int
+}
+
+enum PageType {
+  TEXT
+}

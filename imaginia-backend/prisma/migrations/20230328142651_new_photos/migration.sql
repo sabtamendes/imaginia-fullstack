@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Page" ALTER COLUMN "content" SET DATA TYPE VARCHAR(1000);
