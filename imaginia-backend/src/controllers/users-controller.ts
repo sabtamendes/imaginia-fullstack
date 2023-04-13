@@ -6,7 +6,7 @@ import authenticationService from "../services/authentication-service";
 
 export async function userSignup(req: Request, res: Response) {
   const { email, password } = req.body;
-console.log(req.body, "aqui")
+console.log(req.body, "cadastro")
   try {
     const user = await userService.createUser({ email, password });
     return res.status(httpStatus.CREATED).json({
@@ -14,6 +14,7 @@ console.log(req.body, "aqui")
       email: user.email,
     });
   } catch (error) {
+    console.log(error, "erro cadastro")
     if (error.name === "DuplicatedEmailError") {
       return res.status(httpStatus.CONFLICT).send({});
     }
