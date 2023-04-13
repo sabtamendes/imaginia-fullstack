@@ -6,7 +6,7 @@ services:
     ports:
       - 5433:5432
     env_file:
-      - imaginia-backend/.env.production
+      - imaginia-backend/.env
     volumes:
       - postgres-volume:/var/lib/postgresql/data
 
@@ -18,7 +18,7 @@ services:
     depends_on:
       - postgres
     env_file:
-      - imaginia-backend/.env.production
+      - imaginia-backend/.env
     command: sh -c "npm run migration:run && npm run seed && npm start"
     
     

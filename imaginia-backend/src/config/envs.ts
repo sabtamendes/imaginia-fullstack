@@ -4,7 +4,7 @@ import dotenvExpand from "dotenv-expand";
 export function loadEnv() {
   const path =
   process.env.NODE_ENV === "production"
-    ? ".env.production"
+    ? ".env"
     : process.env.NODE_ENV === "test"
       ? ".env.test"
       : ".env.development";
