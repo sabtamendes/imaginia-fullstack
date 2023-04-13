@@ -36,7 +36,7 @@ export default function SignUp() {
       setDisabled(true);
       setTimeout(() => navigate("/entrar"), 300);
     } catch (error) {
-      if(error.status){
+      if(error.status !== undefined){
         if (error.response.status === 409) {
           return setError("email já existente");
         }
