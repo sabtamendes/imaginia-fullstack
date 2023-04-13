@@ -27,12 +27,14 @@ services:
     build: ./imaginia
     volumes:
       - react-volume:/var/www/html
+    depends_on: 
+      - node
 
   nginx:
     container_name: nginx_app
     build: ./nginx
     ports:
-      - 8080:80
+      - 80:80
     volumes:
       - react-volume:/var/www/html
     depends_on:
