@@ -37,7 +37,7 @@ async function getUserOrFail(email: string): Promise<GetUserOrFailResult> {
 
 async function createSession(userId: number) {
   console.log(userId, "id do usuario para o token")
-  console.log(process.env.JWT_SECRET, "env do token")
+  console.log(process.env, "env do token")
   const token = jwt.sign({ userId }, process.env.JWT_SECRET);
   console.log(token, "token")
   await sessionRepository.create({
