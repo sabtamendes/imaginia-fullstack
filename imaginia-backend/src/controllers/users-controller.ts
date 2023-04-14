@@ -25,7 +25,7 @@ export async function userSignin(req: Request, res: Response) {
   const { email, password } = req.body as SignInParams;
   try {
     const result = await authenticationService.userSignin({ email, password });
-
+console.log(result)
     return res.status(httpStatus.OK).send(result);
   } catch (error) {
     if (error.name === "InvalidCredentialsError") {
