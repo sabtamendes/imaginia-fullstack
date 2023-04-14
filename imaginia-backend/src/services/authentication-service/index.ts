@@ -5,6 +5,8 @@ import { exclude } from "../../utils/prisma-utils";
 import userRepository from "../../repositories/users-repository";
 import { invalidCredentialsError } from "../../errors/invalid-credetentials";
 import sessionRepository from "../../repositories/session-repository";
+import dotenv from "dotenv";
+dotenv.config();
 
 async function userSignin(params: SignInParams): Promise<SignInResult> {
   const { email, password } = params;
@@ -34,7 +36,10 @@ async function getUserOrFail(email: string): Promise<GetUserOrFailResult> {
 }
 
 async function createSession(userId: number) {
+  console.log(userId, "id do usuario para o token")
+  console.log(process.env.JWT_SECRET, "env do token")
   const token = jwt.sign({ userId }, process.env.JWT_SECRET);
+  console.log(token, "token")
   await sessionRepository.create({
     token,
     userId,
