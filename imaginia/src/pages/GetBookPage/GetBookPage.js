@@ -117,7 +117,7 @@ const GetBookPage = () => {
       setBook(response.data);
       setCode("");
     } catch (error) {
-      console.log(error.response.data, "ERROR");
+      console.log(error.response.data);
     }
   };
   return (

@@ -1,15 +1,25 @@
 import { PrismaClient, PageType } from "@prisma/client";
 const prisma = new PrismaClient();
-import { randomBytes } from "crypto";
+//import { randomBytes } from "crypto";
+
+// export function generateRandomCode(): string {
+//   let code = "";
+//   while (code.length < 6) {
+//     const byte = randomBytes(1)[0];
+//     const char = String.fromCharCode(byte);
+//     if (char >= "A" && char <= "Z") {
+//       code += char;
+//     }
+//   }
+//   return code;
+// }
 
 export function generateRandomCode(): string {
+  const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   let code = "";
-  while (code.length < 6) {
-    const byte = randomBytes(1)[0];
-    const char = String.fromCharCode(byte);
-    if (char >= "A" && char <= "Z") {
-      code += char;
-    }
+  for (let i = 0; i < 6; i++) {
+    const index = Math.floor(Math.random() * characters.length);
+    code += characters[index];
   }
   return code;
 }

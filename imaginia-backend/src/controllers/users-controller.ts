@@ -25,10 +25,10 @@ export async function userSignin(req: Request, res: Response) {
   const { email, password } = req.body as SignInParams;
   try {
     const result = await authenticationService.userSignin({ email, password });
-console.log(result, "resultaado backend")
+
     return res.status(httpStatus.OK).send(result);
   } catch (error) {
-    console.log(error, "ERRO CONTROLLER SIGNIN")
+
     if (error.name === "InvalidCredentialsError") {
       return res.status(httpStatus.UNAUTHORIZED).send({});
     }
