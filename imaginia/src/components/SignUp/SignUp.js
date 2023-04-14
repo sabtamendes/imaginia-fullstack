@@ -41,7 +41,6 @@ export default function SignUp() {
           return setError("email já existente");
         }
       }
-      console.log(error, "error")
     }
   }
 

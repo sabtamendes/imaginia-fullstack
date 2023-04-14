@@ -41,7 +41,7 @@ export default function CreateBookPage() {
       const response = await postBook(body);
       setCode(response.data);
     } catch (error) {
-      console.log(error.response.data, "ERROR");
+      console.log(error.response.data);
     }
   };
 

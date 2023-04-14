@@ -5,16 +5,14 @@ import { exclude } from "../../utils/prisma-utils";
 import userRepository from "../../repositories/users-repository";
 import { invalidCredentialsError } from "../../errors/invalid-credetentials";
 import sessionRepository from "../../repositories/session-repository";
-import dotenv from "dotenv";
-dotenv.config();
 
 async function userSignin(params: SignInParams): Promise<SignInResult> {
   const { email, password } = params;
-  console.log(email, password, "email e senha e depois disso ver se o usuário existe, senão existe não vai aparecer nada")
+
   const user = await getUserOrFail(email);
-console.log(user, "usuário existe")
+
   await validatePasswordOrFail(password, user.password);
-  console.log(user, "usuário passou na validação da senha")
+ 
   const token = await createSession(user.id);
 
   return {
@@ -31,15 +29,14 @@ async function getUserOrFail(email: string): Promise<GetUserOrFailResult> {
   });
 
   if (!user) throw invalidCredentialsError();
-  console.log(user,"usuário tem email e é válido")
+ 
   return user;
 }
 
 async function createSession(userId: number) {
-  console.log(userId, "id do usuario para o token")
-  console.log(process.env, "env do token")
+
   const token = jwt.sign({ userId }, process.env.JWT_SECRET);
-  console.log(token, "token")
+
   await sessionRepository.create({
     token,
     userId,
@@ -52,9 +49,8 @@ async function validatePasswordOrFail(password: string, userPassword: string) {
  
   const isPasswordValid = await bcrypt.compare(password, userPassword);
 
-  console.log(isPasswordValid, "a senha é inválida, usuário tem a senha errada")
   if (!isPasswordValid) throw invalidCredentialsError();
-console.log(isPasswordValid, "a senha é válida")
+
   return isPasswordValid;
 }
 
