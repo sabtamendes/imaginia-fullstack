@@ -20,6 +20,7 @@ export default function SignIn() {
       setDisabled(true);
       navigate("/criar livro");
     } catch (error) {
+      console.log(error, "EROOO")
       if (error) {
         return setError("senha e/ou email incorretos!");
       }

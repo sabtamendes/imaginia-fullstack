@@ -8,11 +8,11 @@ import sessionRepository from "../../repositories/session-repository";
 
 async function userSignin(params: SignInParams): Promise<SignInResult> {
   const { email, password } = params;
-
+  console.log(email, password, "email e senha e depois disso ver se o usuário existe, senão existe não vai aparecer nada")
   const user = await getUserOrFail(email);
-console.log(user, "usuário singin")
+console.log(user, "usuário existe")
   await validatePasswordOrFail(password, user.password);
-
+  console.log(user, "usuário passou na validação da senha")
   const token = await createSession(user.id);
 
   return {
@@ -27,8 +27,9 @@ async function getUserOrFail(email: string): Promise<GetUserOrFailResult> {
     email: true,
     password: true,
   });
-  if (!user) throw invalidCredentialsError();
 
+  if (!user) throw invalidCredentialsError();
+  console.log(user,"usuário tem email e é válido")
   return user;
 }
 
@@ -43,9 +44,12 @@ async function createSession(userId: number) {
 }
 
 async function validatePasswordOrFail(password: string, userPassword: string) {
+ 
   const isPasswordValid = await bcrypt.compare(password, userPassword);
+
+  console.log(isPasswordValid, "a senha é inválida, usuário tem a senha errada")
   if (!isPasswordValid) throw invalidCredentialsError();
-console.log(isPasswordValid, "isPasswordValid")
+console.log(isPasswordValid, "a senha é válida")
   return isPasswordValid;
 }
 
