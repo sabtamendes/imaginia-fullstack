@@ -222,8 +222,9 @@ const Button = styled.button`
 const SlideBox = styled.div`
   height: 15%;
   display: flex;
+  flex-direction:column;
   align-items: center;
-  margin: 10px 15px 15px 32%;
+  margin: 10px 15px 15px 3%;
   text-align: center;
   h3 {
     font-family: "Poppins", sans-serif;
