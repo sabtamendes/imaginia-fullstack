@@ -19,9 +19,6 @@ services:
       - postgres
     env_file:
       - imaginia-backend/.env
-    environment:
-      - NODE_ENV=production
-      - JWT_SECRET=your_jwt_secret_here
     command: sh -c "npm run migration:run && npm run seed && npm start"
     
     
